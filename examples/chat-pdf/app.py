@@ -11,6 +11,16 @@ from embedchain.config import BaseLlmConfig
 from embedchain.helpers.callbacks import (StreamingStdOutCallbackHandlerYield,
                                           generate)
 
+os.environ['LANGCHAIN_TRACING_V2'] = 'true'
+
+# Setting the API endpoint for LangChain.
+os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
+
+# Replace '<your-api-key>' with your LangChain API key.
+os.environ['LANGCHAIN_API_KEY'] = 'ls__18b33c33a232426186a23e0a5a073b54'
+
+# Replace '<your-project>' with your LangChain project name.
+os.environ['LANGCHAIN_PROJECT'] = 'SearchMe'
 
 def embedchain_bot(db_path, api_key):
     return App.from_config(
@@ -54,12 +64,8 @@ def get_ec_app(api_key):
 
 
 with st.sidebar:
-    openai_access_token = st.text_input("OpenAI API Key", key="api_key", type="password")
-    "WE DO NOT STORE YOUR OPENAI KEY."
-    "Just paste your OpenAI API key here and we'll use it to power the chatbot. [Get your OpenAI API key](https://platform.openai.com/api-keys)"  # noqa: E501
-
-    if st.session_state.api_key:
-        app = get_ec_app(st.session_state.api_key)
+    
+    app = get_ec_app("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")
 
     pdf_files = st.file_uploader("Upload your PDF files", accept_multiple_files=True, type="pdf")
     add_pdf_files = st.session_state.get("add_pdf_files", [])
@@ -111,7 +117,7 @@ if prompt := st.chat_input("Ask me anything!"):
         st.error("Please enter your OpenAI API Key", icon="🤖")
         st.stop()
 
-    app = get_ec_app(st.session_state.api_key)
+    app = get_ec_app("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")
 
     with st.chat_message("user"):
         st.session_state.messages.append({"role": "user", "content": prompt})
