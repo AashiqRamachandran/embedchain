@@ -18,7 +18,7 @@ def embedchain_bot(db_path, api_key):
             "llm": {
                 "provider": "openai",
                 "config": {
-                    "model": "gpt-3.5-turbo-1106",
+                    "model": "gpt-4-turbo-preview",
                     "temperature": 0.5,
                     "max_tokens": 1000,
                     "top_p": 1,
@@ -87,8 +87,8 @@ with st.sidebar:
             st.stop()
     st.session_state["add_pdf_files"] = add_pdf_files
 
-st.title("📄 Embedchain - Chat with PDF")
-styled_caption = '<p style="font-size: 17px; color: #aaa;">🚀 An <a href="https://github.com/embedchain/embedchain">Embedchain</a> app powered by OpenAI!</p>'  # noqa: E501
+st.title("📄 Chat with your PDF")
+styled_caption = '<p style="font-size: 17px; color: #aaa;">🚀 An LLM powered app to talk to your PDFs</p>'  # noqa: E501
 st.markdown(styled_caption, unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
@@ -96,7 +96,7 @@ if "messages" not in st.session_state:
         {
             "role": "assistant",
             "content": """
-                Hi! I'm chatbot powered by Embedchain, which can answer questions about your pdf documents.\n
+                Hi! I'm chatbot powered by an LLM, which can answer questions about your pdf documents.\n
                 Upload your pdf documents here and I'll answer your questions about them! 
             """,
         }
