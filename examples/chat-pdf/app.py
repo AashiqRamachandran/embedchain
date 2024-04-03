@@ -64,8 +64,8 @@ def get_ec_app(api_key):
 
 
 with st.sidebar:
-    
-    app = get_ec_app("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")
+    st.session_state.api_key = "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"
+    app = get_ec_app(st.session_state.api_key)
 
     pdf_files = st.file_uploader("Upload your PDF files", accept_multiple_files=True, type="pdf")
     add_pdf_files = st.session_state.get("add_pdf_files", [])
@@ -117,7 +117,7 @@ if prompt := st.chat_input("Ask me anything!"):
         st.error("Please enter your OpenAI API Key", icon="🤖")
         st.stop()
 
-    app = get_ec_app("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")
+    app = get_ec_app(st.session_state.api_key)
 
     with st.chat_message("user"):
         st.session_state.messages.append({"role": "user", "content": prompt})
