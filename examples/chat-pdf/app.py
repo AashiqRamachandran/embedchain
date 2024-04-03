@@ -77,7 +77,6 @@ with st.sidebar:
             app.add(temp_file_name, data_type="pdf_file")
             st.markdown("")
             add_pdf_files.append(file_name)
-            os.remove(temp_file_name)
         st.session_state.messages.append({"role": "assistant", "content": f"Added {file_name} to knowledge base!"})
     except Exception as e:
         st.error(f"Error adding {file_name} to knowledge base: {e}")
@@ -93,8 +92,7 @@ if "messages" not in st.session_state:
         {
             "role": "assistant",
             "content": """
-                Hi! I'm chatbot powered by an LLM, which can answer questions about your pdf documents.\n
-                Upload your pdf documents here and I'll answer your questions about them! 
+               Hi! I'm an AI chatbot, which can answer all of your questions!
             """,
         }
     ]
